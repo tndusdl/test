@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function solution(numbers) {
+            // 영어로 된 숫자를 숫자로 바꾸기 위한 사전 만들기
+            // "one"은 1, "two"는 2로 변환하기 위해서 미리 ㄱㄱ 
+            const numberMap = {
+                "zero": "0",  // "zero"는 0이니까 "0"으로 변환
+                "one": "1",   
+                "two": "2",   
+                "three": "3",
+                "four": "4",
+                "five": "5",
+                "six": "6",
+                "seven": "7",
+                "eight": "8",
+                "nine": "9"
+            };
+            
+            // 변환한 숫자를 저장할 빈 문자열을 만들기
+            let result = ""; // 나중에 숫자로 바꾼 결과를 여기에 추가할 거
+            
+            // 임시로 단어를 저장할 변수
+            let tempStr = ""; // 여기에는 영어 단어들이 하나씩 쌓음. 예를 들어 "o", "on", "one" 이런 식으로
+            
+            // 입력된 영어 숫자 문자열을 한 글자씩 검사하기
+            for (let char of numbers) {
+                // 지금 보고 있는 글자를 임시 문자열에 추가
+                tempStr += char; // 예를 들어 "onetwo..."가 들어오면 처음엔 "o", 그다음엔 "on", 그다음엔 "one"이 됨
+                
+                // 임시 문자열이 사전에 있는지 확인해야 하는데 
+                if (numberMap[tempStr] !== undefined) { // 만약 "one", "two" 같은 단어가 완성되면
+                    result += numberMap[tempStr]; // 그 단어에 맞는 숫자를 결과 문자열에 추가 
+                    tempStr = ""; // 단어를 숫자로 바꿨으니까 임시 문자열은 다시 빈 문자열로 초기화
+                }
+            }
+            
+            // 결과 문자열이 다 만들어졌으면,  이걸 숫자로 바꿔서 반환
+            return parseInt(result); // "123456789"처럼 변환된 문자열을 숫자로 변환해서 반환
+        }
+        
+        console.log(solution("onetwothreefourfivesixseveneightnine")); // 123456789
+        console.log(solution("onefourzerosixseven")); // 14067
+        
+    </script>
+</body>
+</html>

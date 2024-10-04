@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영어 숫자를 숫자로 변환하고 인수분해</title>
+</head>
+<body>
+    <script>
+        function solution(numbers) {
+            // 영어로 된 숫자를 숫자로 바꾸기 위한 사전
+            const numberMap = {
+                "zero": "0",
+                "one": "1",   
+                "two": "2",   
+                "three": "3",
+                "four": "4",
+                "five": "5",
+                "six": "6",
+                "seven": "7",
+                "eight": "8",
+                "nine": "9"
+            };
+            
+            let result = "";  // 변환된 숫자를 저장할 문자열
+            let tempStr = "";  // 단어를 임시로 저장할 변수
+
+            // 입력된 영어 숫자 문자열을 한 글자씩 검사
+            for (let char of numbers) {
+                tempStr += char;  // 문자를 임시 문자열에 추가
+                
+                if (numberMap[tempStr] !== undefined) {  // 사전에 있는 단어라면
+                    result += numberMap[tempStr];  // 숫자로 변환하여 결과 문자열에 추가
+                    tempStr = "";  // 임시 문자열 초기화
+                }
+            }
+
+            // 숫자로 변환된 문자열을 정수로 변환하여 반환
+            return parseInt(result);
+        }
+
+        function primeFactorization(num) {
+            let factors = [];  // 소인수를 저장할 배열
+            let divisor = 2;  // 소수의 시작인 2부터 나누기 시작
+
+            while (num > 1) {  // num이 1보다 클 때까지 반복
+                if (num % divisor === 0) {  // 나누어 떨어지면
+                    factors.push(divisor);  // 소인수 배열에 추가
+                    num = num / divisor;  // num을 그 소인수로 나눔
+                } else {
+                    divisor++;  // 나누어 떨어지지 않으면 다음 숫자로 이동
+                }
+            }
+
+            return factors;  // 인수 배열 반환
+        }
+
+        // 테스트 예시
+        let numberString = "onetwothreefourfivesixseveneightnine";  // 숫자 123456789
+        let number = solution(numberString);  // 영어 숫자를 숫자로 변환
+        console.log("변환된 숫자:", number);  // 변환된 숫자 출력
+        console.log("인수분해 결과:", primeFactorization(number));  // 인수분해 결과 출력
+
+        numberString = "onefourzerosixseven";  // 숫자 14067
+        number = solution(numberString);  // 영어 숫자를 숫자로 변환
+        console.log("변환된 숫자:", number);
+        console.log("인수분해 결과:", primeFactorization(number));
+        
+    </script>
+</body>
+</html>

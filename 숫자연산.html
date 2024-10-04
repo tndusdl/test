@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 합이 아닌 숫자 연산으로 계산하기</title>
+</head>
+<body>
+    <script>
+        function solution(numbers) {
+            // 숫자를 영어로 바꾸기 위한 사전
+            const numberMap = {
+                "zero": 0,
+                "one": 1,
+                "two": 2,
+                "three": 3,
+                "four": 4,
+                "five": 5,
+                "six": 6,
+                "seven": 7,
+                "eight": 8,
+                "nine": 9
+            };
+            
+            // 결과를 계산하기 위한 변수들
+            let result = 0; // 최종 숫자를 저장
+            let tempStr = ""; // 영어 단어를 저장할 임시 변수
+            
+            // 입력된 영어 숫자 문자열을 한 글자씩 처리
+            for (let char of numbers) {
+                tempStr += char; // 임시 변수에 문자를 추가하여 단어를 완성
+                
+                // 완성된 단어가 숫자 사전에 있는지 확인
+                if (numberMap[tempStr] !== undefined) {
+                    // 만약 완성된 단어가 사전에 있으면 해당 숫자를 추가
+                    
+                    result = result * 10 + numberMap[tempStr]; // 기존 숫자에 자릿수를 늘리면서 새로운 숫자를 더함
+                    tempStr = ""; // 단어를 숫자로 변환했으니 임시 변수 초기화
+                }
+            }
+            
+            // 최종 계산된 결과 반환
+            return result;
+        }
+        
+        console.log(solution("onetwozero")); // 120
+        console.log(solution("threefourfive")); // 345
+        console.log(solution("nineeightseven")); // 987
+    </script>
+</body>
+</html>
